@@ -67,3 +67,17 @@ const round = (playerSel, computerSelection) => {
     }
 }
 
+//game() plays a game of rock paper scissors of 5 rounds
+
+const game = () => {
+    win = 0
+    for (let i = 0; i < 5; i++) {
+        const player = prompt("Rock, Paper, Scissors, Shoot!")
+        const computer = computerPlay()
+        const result = round(player, computer)
+        if (result.indexOf("win") !== -1) {
+            win += 1
+        }
+        console.log(`You have won ${win} rounds out of ${i + 1} total rounds`);
+    }
+}

@@ -1,3 +1,10 @@
+//Globals
+let computerSelection;
+let playerSelection;
+let computerScore = 0;
+let playerScore = 0;
+let rounds = 0
+
 //ROCK PAPER SCISSOR GAME
 /*Data definitions 
 Entity is one of 
@@ -22,7 +29,7 @@ const round = (playerSel, computerSelection) => {
     const win = () => {return `You win! ${correctedSel} beats ${computerSelection}`}
     const lose = () => { return `You lose! ${computerSelection} beats ${correctedSel}`}
     const tie = () => {return `You tie!`}
-    switch (correctedSel.toLowerCase()) {
+    switch (correctedSel) {
         case 'rock':
             switch (computerSelection.toLowerCase()) {
                 case 'paper':
@@ -69,15 +76,62 @@ const round = (playerSel, computerSelection) => {
 
 //game() plays a game of rock paper scissors of 5 rounds
 
-const game = () => {
-    win = 0
-    for (let i = 0; i < 5; i++) {
-        const player = prompt("Rock, Paper, Scissors, Shoot!")
-        const computer = computerPlay()
-        const result = round(player, computer)
-        if (result.indexOf("win") !== -1) {
-            win += 1
-        }
-        console.log(`You have won ${win} rounds out of ${i + 1} total rounds`);
+const game = (playerSelection, computerSelection) => {
+    computerSelection = computerPlay()
+    const winner = round(playerSelection, computerSelection)
+    if (winner.indexOf("win") !== -1) {
+        playerScore += 1
     }
+    if (winner.indexOf("lose") !== -1) {
+        computerScore += 1
+    }
+    rounds += 1
+
+    result.textContent = `You have won ${playerScore} rounds out of ${playerScore + computerScore} total rounds`;
+    
 }
+
+
+//DOM manipulation
+const body = document.querySelector('body')
+
+//buttons
+const rock = document.createElement('button')
+rock.addEventListener('click', () => { 
+    playerSelection = 'rock'
+    game(playerSelection, computerSelection)
+    if(playerScore === 5 || computerScore === 5) {
+        result.textContent = playerScore === 5 ? 'player won' : 'computer won'
+    }})
+
+    rock.textContent = "rock"
+body.appendChild(rock)
+
+const scissors = document.createElement('button')
+scissors.addEventListener('click',() => { 
+    playerSelection = 'scissors'
+    game(playerSelection,computerSelection)
+    if(playerScore === 5 || computerScore === 5){
+        result.textContent = playerScore === 5 ? 'player won' : 'computer won'
+    }})
+
+    scissors.textContent = 'scissors'
+body.appendChild(scissors)
+
+const paper = document.createElement('button')
+paper.addEventListener('click', () => { 
+    playerSelection = 'paper'
+    game(playerSelection, computerScore)
+    if(playerScore === 5 || computerScore === 5) {
+        result.textContent = playerScore === 5 ? 'player won' : 'computer won'
+    }})
+
+    paper.textContent = 'paper'
+body.appendChild(paper)
+
+//results
+const result = document.createElement('div')
+body.appendChild(result)
+
+
+

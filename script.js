@@ -87,7 +87,7 @@ const game = (playerSelection, computerSelection) => {
     }
     rounds += 1
 
-    result.textContent = `You have won ${playerScore} rounds out of ${playerScore + computerScore} total rounds`;
+    result.textContent = `You have won ${playerScore} rounds out of ${rounds} total rounds`;
     
 }
 
